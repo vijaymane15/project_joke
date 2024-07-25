@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jokes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        .form-select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        section {
+            margin-top: 20px;
+            text-align: center;
+        }
+        section p {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="jokeForm" action="/" method="post">
+            <h2>Select a category for your joke:</h2>
+            <select name="category" class="form-select">
+                <option value="any" selected>Select Category(Any)</option>
+                <option value="programming">Programming</option>
+                <option value="misc">Misc</option>
+                <option value="dark">Dark</option>
+                <option value="pun">Pun</option>
+                <option value="spooky">Spooky</option>
+                <option value="christmas">Christmas</option>
+            </select>
+
+            <h2>Exclude categories:</h2>
+            <select name="flags" class="form-select">
+                <option value="none" selected>Exclude None</option>
+                <option value="nsfw">NSFW</option>
+                <option value="religious">Religious</option>
+                <option value="political">Political</option>
+                <option value="racist">Racist</option>
+                <option value="sexist">Sexist</option>
+                <option value="explicit">Explicit</option>
+            </select>
+
+            <h2>Select joke type:</h2>
+            <select name="type" class="form-select">
+                <option value="single" selected>Single Part</option>
+                <option value="twopart">Two Part</option>
+            </select>
+
+            <button type="submit" id="getJokeBtn">Give me a joke!</button>
+        </form>
+
+        <section id="jokeSection">
+            <% if (error) { %>
+                <p>Error: <%= error %></p>
+            <% } else if (data) { %>
+                <h3>Here is a joke for you...</h3>
+                <% if (typeof data === "string") { %>
+                    <p><%= data %></p>
+                <% } else { %>
+                    <p>Unexpected data format</p>
+                <% } %>
+            <% } else { %>
+                <p>No joke available</p>
+            <% } %>
+        </section>
+    </div>
+</body>
+</html>
